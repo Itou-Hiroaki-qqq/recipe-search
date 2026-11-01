@@ -5,7 +5,7 @@ import { auth } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const router = useRouter();
-const route = useRoute();        // ← ← ← これが重要！（復活）
+const route = useRoute();
 const currentUser = ref(null);
 const ready = ref(false);
 
@@ -24,19 +24,15 @@ const logout = async () => {
 
 <template>
   <div class="max-w-4xl mx-auto">
-    <!-- ヘッダー：上部に余白 mt-8 を追加 -->
     <header class="flex justify-between items-start px-4 mb-6 mt-8 w-full">
-      <!-- 左：タイトル -->
       <h1 class="text-2xl font-bold">簡単レシピ検索</h1>
 
-      <!-- 右：ボタン群＋お気に入りリスト -->
       <div class="flex flex-col items-end gap-3">
-        <!-- 上段：ログイン／ログアウト／トップ -->
         <div
           class="flex gap-3 
-                 transform scale-110 text-base
-                 sm:scale-90 sm:text-xs
-                 [@media(max-width:400px)]:scale-75 [@media(max-width:400px)]:text-[10px]"
+                transform scale-110 text-base
+                sm:scale-90 sm:text-xs
+                [@media(max-width:400px)]:scale-75 [@media(max-width:400px)]:text-[10px]"
         >
           <template v-if="route.path === '/favorites'">
             <router-link
@@ -66,7 +62,6 @@ const logout = async () => {
           </template>
         </div>
 
-        <!-- 下段：お気に入りリスト -->
         <div v-if="route.path !== '/favorites'">
           <router-link
             to="/favorites"
@@ -78,12 +73,10 @@ const logout = async () => {
       </div>
     </header>
 
-    <!-- メイン -->
     <main class="px-4">
       <router-view v-if="ready" :current-user="currentUser" />
     </main>
 
-    <!-- フッター -->
     <footer class="text-center mt-10 text-sm text-gray-500">
       All Rights Reserved 2025 ©︎ Hiroaki Ito
     </footer>
